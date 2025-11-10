@@ -34,7 +34,7 @@ function filterData() {
         // ... kode inisialisasi tabel yang sudah ada ...
     
         // 🟢 TAMBAHKAN KODE INI DI BAWAHNYA
-        const searchButton = document.getElementById('searchButton');
+        const existingTable = document.getElementById('data-table');
         if (searchButton) {
             // Tambahkan event listener ke tombol 'Cari'
             searchButton.addEventListener('click', filterData);
@@ -43,7 +43,7 @@ function filterData() {
         // Tampilkan semua data saat halaman pertama kali dibuka
         renderTable(dataKaryawan);
     });
-    
+
     // Filter dataKaryawan
     const filteredData = dataKaryawan.filter(karyawan => {
         // Gabungkan Nama dan Posisi menjadi satu string pencarian
