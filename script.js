@@ -30,10 +30,20 @@ function renderTable(data) {
 
 // 2. Fungsi yang Dipanggil Tombol "Cari" di HTML
 function filterData() {
-    // Ambil nilai dari input pencarian, ubah ke huruf kecil (case-insensitive)
-    const searchInput = document.getElementById('searchInput');
-    const searchTerm = searchInput.value.toLowerCase();
-
+    document.addEventListener('DOMContentLoaded', () => {
+        // ... kode inisialisasi tabel yang sudah ada ...
+    
+        // 🟢 TAMBAHKAN KODE INI DI BAWAHNYA
+        const searchButton = document.getElementById('searchButton');
+        if (searchButton) {
+            // Tambahkan event listener ke tombol 'Cari'
+            searchButton.addEventListener('click', filterData);
+        }
+        
+        // Tampilkan semua data saat halaman pertama kali dibuka
+        renderTable(dataKaryawan);
+    });
+    
     // Filter dataKaryawan
     const filteredData = dataKaryawan.filter(karyawan => {
         // Gabungkan Nama dan Posisi menjadi satu string pencarian
