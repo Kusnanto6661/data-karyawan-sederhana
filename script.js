@@ -1,4 +1,4 @@
-// Data Karyawan (Pastikan ini adalah data yang benar)
+// Data Karyawan (Data Sumber)
 const dataKaryawan = [
     { id: "ID-001", nama: "Budi Santoso", posisi: "Project Manager", usia: 35 },
     { id: "ID-002", nama: "Ani Wijaya", posisi: "Front-End Developer", usia: 28 },
@@ -10,8 +10,12 @@ const dataKaryawan = [
 
 // 1. Fungsi untuk Menggambar Ulang Tabel
 function renderTable(data) {
-    const tableBody = document.getElementById('tableBody');
-    // Bersihkan isi tabel yang lama
+    // ID tableBody harus ada di HTML Anda (atau dibuat oleh DOMContentLoaded)
+    const tableBody = document.getElementById('tableBody'); 
+    
+    // Safety check: jika tableBody tidak ditemukan, hentikan fungsi
+    if (!tableBody) return;
+
     tableBody.innerHTML = ''; 
 
     if (data.length === 0) {
@@ -28,25 +32,14 @@ function renderTable(data) {
     });
 }
 
-// 2. Fungsi yang Dipanggil Tombol "Cari" di HTML
+// 2. Fungsi yang Dipanggil Tombol "Cari" (HANYA BERISI LOGIKA FILTER)
 function filterData() {
-    document.addEventListener('DOMContentLoaded', () => {
-        // ... kode inisialisasi tabel yang sudah ada ...
-    
-        // 🟢 TAMBAHKAN KODE INI DI BAWAHNYA
-        const existingTable = document.getElementById('data-table');
-        if (searchButton) {
-            // Tambahkan event listener ke tombol 'Cari'
-            searchButton.addEventListener('click', filterData);
-        }
-        
-        // Tampilkan semua data saat halaman pertama kali dibuka
-        renderTable(dataKaryawan);
-    });
+    // Ambil nilai dari input pencarian
+    const searchInput = document.getElementById('searchInput');
+    const searchTerm = searchInput.value.toLowerCase(); // Ambil kata kunci
 
-    // Filter dataKaryawan
+    // Filter dataKaryawan (menggunakan data sumber yang didefinisikan di luar fungsi)
     const filteredData = dataKaryawan.filter(karyawan => {
-        // Gabungkan Nama dan Posisi menjadi satu string pencarian
         const searchString = `${karyawan.nama} ${karyawan.posisi}`.toLowerCase();
         
         // Cek apakah string pencarian mengandung kata kunci
@@ -57,12 +50,12 @@ function filterData() {
     renderTable(filteredData);
 }
 
-// 3. Panggil fungsi renderTable saat halaman dimuat pertama kali
+// 3. Panggil fungsi inisialisasi saat halaman dimuat (DOM sudah siap)
 document.addEventListener('DOMContentLoaded', () => {
-    // Pastikan ID tabel di HTML Anda adalah 'tabelkaryawan'
-    const existingTable = document.getElementById('tabelkaryawan');
+    // Gunakan ID yang benar: 'data-table'
+    const existingTable = document.getElementById('data-table');
     
-    // Ganti <tbody> yang lama dengan <tbody> baru yang memiliki ID untuk diakses
+    // Inisialisasi struktur <thead> dan <tbody>
     if (existingTable) {
         existingTable.innerHTML = `
             <thead>
@@ -78,6 +71,12 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
+    // Pasang Event Listener ke tombol 'Cari'
+    const searchButton = document.getElementById('searchButton');
+    if (searchButton) {
+        searchButton.addEventListener('click', filterData);
+    }
+    
     // Tampilkan semua data saat halaman pertama kali dibuka
     renderTable(dataKaryawan);
 });
