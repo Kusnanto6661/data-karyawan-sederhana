@@ -1,40 +1,73 @@
-// 1. Definisikan Data Karyawan
+// Data Karyawan (Pastikan ini adalah data yang benar)
 const dataKaryawan = [
-    { id: "E001", nama: "Aku Yo Rapopo", jabatan: "Manager", gaji: 15000000 },
-    { id: "E002", nama: "Kowe Gelem Ra", jabatan: "Staff IT", gaji: 8500000 },
-    { id: "E003", nama: "Ra Madang Luwe", jabatan: "Sales", gaji: 7000000 },
-    { id: "E004", nama: "Jane Kaeki Sopo", jabatan: "HRD", gaji: 9000000 }
+    { id: "ID-001", nama: "Budi Santoso", posisi: "Project Manager", usia: 35 },
+    { id: "ID-002", nama: "Ani Wijaya", posisi: "Front-End Developer", usia: 28 },
+    { id: "ID-003", nama: "Cahyo Utomo", posisi: "Back-End Developer", usia: 32 },
+    { id: "ID-004", nama: "Dina Fitriani", posisi: "UX Designer", usia: 25 },
+    { id: "ID-005", nama: "Eko Prasetyo", posisi: "Data Analyst", usia: 29 }
+    // Tambahkan data karyawan Anda yang lain di sini
 ];
 
-// 2. Fungsi untuk menampilkan data ke tabel
-function tampilkanDataKaryawan() {
-    // Ambil elemen <tbody> dari HTML
-    const tabelBody = document.querySelector("#tabelKaryawan tbody");
-    
-    // Pastikan <tbody> kosong sebelum mengisi
-    tabelBody.innerHTML = ''; 
+// 1. Fungsi untuk Menggambar Ulang Tabel
+function renderTable(data) {
+    const tableBody = document.getElementById('tableBody');
+    // Bersihkan isi tabel yang lama
+    tableBody.innerHTML = ''; 
 
-    // Loop (ulang) melalui setiap objek di array dataKaryawan
-    dataKaryawan.forEach(karyawan => {
-        // Buat baris (<tr>) baru
-        const baris = document.createElement('tr'); 
+    if (data.length === 0) {
+        tableBody.innerHTML = '<tr><td colspan="4" style="text-align: center;">Data tidak ditemukan.</td></tr>';
+        return;
+    }
 
-        // Format gaji ke format mata uang Indonesia (opsional, tapi disarankan)
-        const gajiFormat = new Intl.NumberFormat('id-ID').format(karyawan.gaji);
-
-        // Isi baris dengan data sel (<td>)
-        baris.innerHTML = `
-            <td>${karyawan.id}</td>
-            <td>${karyawan.nama}</td>
-            <td>${karyawan.jabatan}</td>
-            <td>Rp ${gajiFormat}</td>
-        `;
-        
-        // Tambahkan baris ke dalam <tbody>
-        tabelBody.appendChild(baris);
+    data.forEach(karyawan => {
+        const row = tableBody.insertRow();
+        row.insertCell().textContent = karyawan.id;
+        row.insertCell().textContent = karyawan.nama;
+        row.insertCell().textContent = karyawan.posisi;
+        row.insertCell().textContent = karyawan.usia;
     });
 }
 
-// 3. Panggil fungsi setelah halaman dimuat
-// Ini memastikan elemen tabel sudah ada sebelum script mencoba memanipulasinya
-document.addEventListener('DOMContentLoaded', tampilkanDataKaryawan);
+// 2. Fungsi yang Dipanggil Tombol "Cari" di HTML
+function filterData() {
+    // Ambil nilai dari input pencarian, ubah ke huruf kecil (case-insensitive)
+    const searchInput = document.getElementById('searchInput');
+    const searchTerm = searchInput.value.toLowerCase();
+
+    // Filter dataKaryawan
+    const filteredData = dataKaryawan.filter(karyawan => {
+        // Gabungkan Nama dan Posisi menjadi satu string pencarian
+        const searchString = `${karyawan.nama} ${karyawan.posisi}`.toLowerCase();
+        
+        // Cek apakah string pencarian mengandung kata kunci
+        return searchString.includes(searchTerm);
+    });
+
+    // Panggil fungsi renderTable untuk menampilkan data yang sudah difilter
+    renderTable(filteredData);
+}
+
+// 3. Panggil fungsi renderTable saat halaman dimuat pertama kali
+document.addEventListener('DOMContentLoaded', () => {
+    // Pastikan ID tabel di HTML Anda adalah 'tabelkaryawan'
+    const existingTable = document.getElementById('tabelkaryawan');
+    
+    // Ganti <tbody> yang lama dengan <tbody> baru yang memiliki ID untuk diakses
+    if (existingTable) {
+        existingTable.innerHTML = `
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nama</th>
+                    <th>Posisi</th>
+                    <th>Usia</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+            </tbody>
+        `;
+    }
+
+    // Tampilkan semua data saat halaman pertama kali dibuka
+    renderTable(dataKaryawan);
+});
