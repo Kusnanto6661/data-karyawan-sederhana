@@ -23,5 +23,10 @@ Saya berencana untuk mengembangkan proyek ini lebih lanjut dengan menambahkan:
 ## 🏃‍♂️ Cara Menjalankan
 Cukup *clone* *repository* ini atau **buka *live demo*** melalui tautan GitHub Pages (akan tersedia setelah diaktifkan).
 
----
+## 🏆 Validasi Keahlian
+
+Proyek ini dibangun berdasarkan keahlian JavaScript, HTML, dan DOM Manipulation yang divalidasi oleh kursus dari Dicoding.
+
+* **Bukti Sertifikat:** [Lihat Sertifikat Asli (PDF)](https://github.com/Kusnanto6661/data-karyawan-sederhana/blob/main/sertifikat/sertifikat_dicoding.pdf)
+
 *Dibuat oleh Kusnanto sebagai bagian dari portofolio pengembangan web.*
