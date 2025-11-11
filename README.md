@@ -27,6 +27,6 @@ Cukup *clone* *repository* ini atau **buka *live demo*** melalui tautan GitHub P
 
 Proyek ini dibangun berdasarkan keahlian JavaScript, HTML, dan DOM Manipulation yang divalidasi oleh kursus dari Dicoding.
 
-* **Bukti Sertifikat:** [Lihat Sertifikat Asli (PDF)](https://github.com/Kusnanto6661/data-karyawan-sederhana/blob/main/sertifikat/sertifikat_dicoding.pdf)
-
+* **Bukti Sertifikat:** [Lihat Sertifikat Asli (PDF)](https://github.com/Kusnanto6661/data-karyawan-sederhana/tree/main/%24%24%5Cmathbf%7B%5Ctext%7Bsertifikat)
+  
 *Dibuat oleh Kusnanto sebagai bagian dari portofolio pengembangan web.*
