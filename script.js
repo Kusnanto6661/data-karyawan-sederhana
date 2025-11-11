@@ -54,35 +54,29 @@ function renderTable(data) {
 // 2. Fungsi Logika Pengurutan
 function sortData(key) {
     // 1. Tentukan Arah Pengurutan
-    // Jika kolom yang diklik SAMA dengan kolom yang terakhir diurutkan, balik arahnya
-    if (currentSortKey === key) {
-        isAscending = !isAscending;
-    } else {
-        // Jika kolom BARU yang diklik, atur ke Ascending
-        currentSortKey = key;
-        isAscending = true;
-    }
+    // Tentukan arah urutan baru (asc/desc)
+    const order = toggleSortOrder(key);
 
     // 2. Lakukan Pengurutan pada dataKaryawan
     dataKaryawan.sort((a, b) => {
-        const valueA = a[key];
-        const valueB = b[key];
+        let valA = a[key];
+        let valB = b[key];
         let comparison = 0;
 
-        // Penanganan Angka (Usia) vs String (Nama/Posisi/ID)
-        if (typeof valueA === 'number' && typeof valueB === 'number') {
-             comparison = valueA - valueB;
+        // Penanganan Usia (Angka) vs String (Nama/Posisi/ID)
+        // Jika kuncinya 'usia', pastikan perbandingannya angka
+        if (key === 'usia') {
+            valA = parseInt(valA);
+            valB = parseInt(valB);
+            comparison = valA - valB;
         } else {
-             // String comparison (case-insensitive)
-             if (String(valueA).localeCompare(String(valueB)) > 0) {
-                 comparison = 1;
-             } else if (String(valueA).localeCompare(String(valueB)) < 0) {
-                 comparison = -1;
-             }
+            // String comparison (case-insensitive)
+            comparison = String(valA).localeCompare(String(valB));
         }
 
         // Terapkan arah pengurutan
-        return isAscending ? comparison : comparison * -1;
+        const finalComparison = order === 'asc' ? comparison : comparison * -1;
+        return finalComparison;
     });
 
     // Setelah diurutkan, panggil renderTable untuk menampilkan hasil
@@ -106,32 +100,13 @@ function filterData() {
 
 // 4. Inisialisasi Aplikasi (DOM Content Loaded)
 document.addEventListener('DOMContentLoaded', () => {
-    const existingTable = document.getElementById('data-table');
-    
-    // Inisialisasi struktur <thead> dan <tbody>
-    if (existingTable) {
-        existingTable.innerHTML = `
-            <thead>
-                <tr>
-                <th data-sort-key="nama">nama</th>
-                <th data-sort-key="posisi">posisi</th>
-                <th data-sort-key="usia">usia</th>
-                <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody id="tableBody">
-            </tbody>
-        `;
-    }
-    
+
     // Pasang Event Listener ke header kolom (untuk Sorting)
     const tableHeaders = document.querySelectorAll('th[data-sort-key]');
     tableHeaders.forEach(header => {
         const key = header.getAttribute('data-sort-key');
-        // Saat header diklik, panggil sortData dengan key yang sesuai (id, nama, posisi, usia)
         header.addEventListener('click', () => sortData(key));
     });
-
 
     // Pasang Event Listener ke tombol 'Cari' (untuk Filtering)
     const searchButton = document.getElementById('searchButton');
@@ -139,6 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
         searchButton.addEventListener('click', filterData);
     }
     
-    // Tampilkan data awal (sudah diurutkan berdasarkan 'id' secara default)
-    renderTable(dataKaryawan);
+    // Panggilan untuk menampilkan data awal
+    renderTable(dataKaryawan); 
 });
