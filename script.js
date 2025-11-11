@@ -44,10 +44,10 @@ function renderTable(data) {
 
     data.forEach(karyawan => {
         const row = tableBody.insertRow();
-        row.insertCell().textContent = karyawan.id;
         row.insertCell().textContent = karyawan.nama;
         row.insertCell().textContent = karyawan.posisi;
         row.insertCell().textContent = karyawan.usia;
+        row.insertCell().textContent = '...';
     });
 }
 
@@ -113,9 +113,9 @@ document.addEventListener('DOMContentLoaded', () => {
         existingTable.innerHTML = `
             <thead>
                 <tr>
-                <th data-sort-key="name">Nama</th>
-                <th data-sort-key="position">Posisi</th>
-                <th data-sort-key="age">Usia</th>
+                <th data-sort-key="nama">Nama</th>
+                <th data-sort-key="posisi">Posisi</th>
+                <th data-sort-key="Usia">Usia</th>
                 <th>Aksi</th>
                 </tr>
             </thead>
