@@ -113,10 +113,10 @@ document.addEventListener('DOMContentLoaded', () => {
         existingTable.innerHTML = `
             <thead>
                 <tr>
-                    <th data-key="id">ID</th>
-                    <th data-key="nama">Nama</th>
-                    <th data-key="posisi">Posisi</th>
-                    <th data-key="usia">Usia</th>
+                <th data-sort-key="name">Nama</th>
+                <th data-sort-key="position">Posisi</th>
+                <th data-sort-key="age">Usia</th>
+                <th>Aksi</th>
                 </tr>
             </thead>
             <tbody id="tableBody">
@@ -125,9 +125,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // Pasang Event Listener ke header kolom (untuk Sorting)
-    const tableHeaders = document.querySelectorAll('th[data-key]');
+    const tableHeaders = document.querySelectorAll('th[data-sort-key]');
     tableHeaders.forEach(header => {
-        const key = header.getAttribute('data-key');
+        const key = header.getAttribute('data-sort-key');
         // Saat header diklik, panggil sortData dengan key yang sesuai (id, nama, posisi, usia)
         header.addEventListener('click', () => sortData(key));
     });
