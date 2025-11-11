@@ -8,6 +8,23 @@ let dataKaryawan = [
     // Tambahkan data karyawan Anda yang lain di sini
 ];
 
+// Variabel untuk menyimpan urutan pengurutan saat ini
+let sortOrder = {}; 
+
+/**
+ * Mengubah urutan pengurutan (asc/desc) untuk kolom tertentu.
+ * @param {string} key - kunci kolom yang diurutkan
+ * @returns {string} urutan pengurutan baru
+ */
+function toggleSortOrder(key) {
+    if (!sortOrder[key] || sortOrder[key] === 'desc') {
+        sortOrder[key] = 'asc';
+    } else {
+        sortOrder[key] = 'desc';
+    }
+    return sortOrder[key];
+}
+
 // Status pengurutan global
 let currentSortKey = 'id'; // default sort key
 let isAscending = true;   // default sort direction (Ascending: A-Z, 1-9)
