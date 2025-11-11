@@ -113,9 +113,9 @@ document.addEventListener('DOMContentLoaded', () => {
         existingTable.innerHTML = `
             <thead>
                 <tr>
-                <th data-sort-key="nama">Nama</th>
-                <th data-sort-key="posisi">Posisi</th>
-                <th data-sort-key="Usia">Usia</th>
+                <th data-sort-key="nama">nama</th>
+                <th data-sort-key="posisi">posisi</th>
+                <th data-sort-key="usia">usia</th>
                 <th>Aksi</th>
                 </tr>
             </thead>
