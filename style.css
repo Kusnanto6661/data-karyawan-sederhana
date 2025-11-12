@@ -1,89 +1,53 @@
-/* --- RESET DASAR --- */
+/* style.css (Kode Baru dan Bersih) */
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f9; /* Warna abu-abu muda yang netral */
-    margin: 0;
-    padding: 20px;
-    display: flex;
-    justify-content: center; /* Memosisikan container di tengah horizontal */
-    align-items: flex-start; /* Memastikan konten mulai dari atas */
-    min-height: 100vh;
+    margin: 20px;
 }
 
-/* --- CONTAINER UTAMA --- */
-.container {
-    background-color: #ffffff; /* Latar belakang putih */
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Bayangan lembut */
-    width: 100%;
-    max-width: 900px; /* Batasan lebar agar tidak terlalu lebar di layar besar */
-}
-
-/* --- JUDUL --- */
 h1 {
-    color: #333;
-    text-align: center;
-    margin-bottom: 25px;
-    font-size: 24px;
+    margin-bottom: 15px;
 }
 
-/* --- AREA PENCARIAN --- */
-#search-area {
-    margin-bottom: 20px;
-    display: flex; /* Membuat input dan tombol sejajar */
-    gap: 10px; /* Jarak antara input dan tombol */
+/* Merapikan Kontrol Pencarian dan Tombol 'Cari' */
+.search-controls {
+    /* Menggunakan Flexbox agar input dan tombol 'Cari' bersebelahan */
+    display: flex; 
+    gap: 5px; 
+    
+    /* Memberi jarak dari tombol Tambah Karyawan di atasnya */
+    margin-top: 20px; 
+    margin-bottom: 10px;
 }
 
-#searchInput {
-    flex-grow: 1; /* Membuat input mengambil sisa ruang */
-    padding: 10px;
+/* Jarak Tombol Tambah Karyawan dari Judul */
+#tombolTambah {
+    margin-bottom: 5px; 
+}
+
+/* Styling Dasar Tabel agar terlihat jelas */
+table {
+    width: 100%;
+    border-collapse: collapse; /* Menghilangkan spasi antar border sel */
+    margin-top: 15px; /* Jarak dari garis pemisah */
+}
+
+th, td {
     border: 1px solid #ccc;
-    border-radius: 4px;
+    padding: 8px;
+    text-align: left;
 }
 
-#search-area button {
-    padding: 10px 15px;
-    background-color: #007bff; /* Warna biru profesional */
+/* Styling untuk Tombol Hapus agar terlihat berbeda */
+.delete-btn {
+    background-color: #ff4d4d;
     color: white;
     border: none;
-    border-radius: 4px;
+    padding: 5px 10px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    border-radius: 3px;
 }
 
-#search-area button:hover {
-    background-color: #0056b3;
-}
-
-/* --- TABEL DATA KARYAWAN --- */
-#data-table {
-    width: 100%;
-    border-collapse: collapse; /* Menghilangkan garis ganda */
-    margin-top: 15px;
-}
-
-/* Header Tabel */
-#data-table thead th {
-    background-color: #007bff; /* Latar belakang biru yang sama dengan tombol */
-    color: white;
-    padding: 12px;
-    text-align: left;
-    border: 1px solid #ddd;
-}
-
-/* Isi Tabel */
-#data-table tbody td {
-    padding: 10px;
-    border: 1px solid #ddd;
-}
-
-/* Efek Hover (Saat kursor di atas baris) */
-#data-table tbody tr:hover {
-    background-color: #f0f0f0; /* Efek highlight abu-abu muda */
-}
-
-/* Zebra Striping (Warna selang-seling untuk keterbacaan) */
-#data-table tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
+.delete-btn:hover {
+    background-color: #cc0000;
 }

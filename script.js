@@ -94,10 +94,9 @@ function renderTable(data) {
 }
 
 
-// 2. Fungsi Logika Pengurutan
+// --- GANTI SELURUH FUNGSI sortData() LAMA ANDA DENGAN KODE INI ---
 function sortData(key) {
     // 1. Tentukan Arah Pengurutan
-    // Tentukan arah urutan baru (asc/desc)
     const order = toggleSortOrder(key);
 
     // 2. Lakukan Pengurutan pada dataKaryawan
@@ -106,14 +105,13 @@ function sortData(key) {
         let valB = b[key];
         let comparison = 0;
 
-        // Penanganan Usia (Angka) vs String (Nama/Posisi/ID)
-        // Jika kuncinya 'usia', pastikan perbandingannya angka
+        // Penanganan Angka (Usia)
         if (key === 'usia') {
-            valA = parseInt(valA);
-            valB = parseInt(valB);
+            // Pastikan perbandingan angka
             comparison = valA - valB;
         } else {
-            // String comparison (case-insensitive)
+            // Penanganan String (ID, Nama, Posisi) - Case-Insensitive
+            // Menggunakan localeCompare adalah cara yang paling akurat
             comparison = String(valA).localeCompare(String(valB));
         }
 
@@ -124,8 +122,11 @@ function sortData(key) {
 
     // Setelah diurutkan, panggil renderTable untuk menampilkan hasil
     renderTable(dataKaryawan);
+    
+    // Opsional: Untuk melihat hasilnya di console saat debugging
+    // console.log(`Data diurutkan berdasarkan ${key}: ${order}`);
 }
-
+// ---------------------------------------------------------------------
 
 // 3. Fungsi Filter Data 
 function filterData() {

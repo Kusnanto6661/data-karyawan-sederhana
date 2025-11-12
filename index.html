@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Karyawan Sederhana</title>
-    <link rel="stylesheet" href="style.css">    
+    <link rel="stylesheet" href="style.css">     
 </head>
 <body>
 
     <h1>Manajemen Data Karyawan</h1>
 
     <button id="tombolTambah">Tambah Karyawan Baru</button>
-
 
     <div id="modalTambah" style="display: none;">
         <form id="formTambahKaryawan"> 
@@ -30,12 +29,13 @@
             <button type="button" onclick="document.getElementById('modalTambah').style.display='none'">Batal</button>
         </form>
     </div>
-    ---
     
-    <input type="text" id="searchInput" placeholder="Cari Nama/Posisi...">
-    <button id="searchButton">Cari</button>
-
-    <table>
+    <div class="search-controls" style="margin-top: 20px; margin-bottom: 10px;">
+        <input type="text" id="searchInput" placeholder="Cari Nama/Posisi...">
+        <button id="searchButton">Cari</button>
+    </div>
+    
+    <hr> <table>
         <thead>
             <tr>
                 <th data-sort-key="id">ID</th>
@@ -45,8 +45,8 @@
                 <th>Aksi</th> </tr>
         </thead>
         <tbody id="tableBody">
-            </tbody>
-        </table>
+        </tbody>
+    </table>
 
 <script src="script.js"></script> 
 </body>
