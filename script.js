@@ -48,22 +48,37 @@ function toggleSortOrder(key) {
 let currentSortKey = 'id'; // default sort key
 let isAscending = true;   // default sort direction (Ascending: A-Z, 1-9)
 
-// --- MODIFIKASI FUNGSI renderTable LAMA ANDA ---
+// --- GANTI SELURUH FUNGSI RENDER TABLE DENGAN KODE INI ---
+
 function renderTable(data) {
-    const tableBody = document.getElementById('tableBody'); 
-    tableBody.innerHTML = '';
-    // ... (kode pengecekan) ...
+    const tableBody = document.getElementById('tableBody');
+    // Jika tabel body tidak ditemukan, hentikan fungsi
+    if (!tableBody) return; 
+
+    tableBody.innerHTML = ''; // Kosongkan tabel sebelum merender
+
+    // Jika data kosong, tampilkan pesan
+    if (data.length === 0) {
+        tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center;">Data tidak ditemukan.</td></tr>';
+        return;
+    }
 
     data.forEach(karyawan => {
         const row = tableBody.insertRow();
         
-        // BARIS INI DITAMBAHKAN UNTUK ID
+        // Sel 1: ID
         row.insertCell().textContent = karyawan.id; 
-        row.insertCell().textContent = karyawan.nama;
-        row.insertCell().textContent = karyawan.posisi;
-        row.insertCell().textContent = karyawan.usia;
-        row.insertCell().textContent = '...';
         
+        // Sel 2: Nama
+        row.insertCell().textContent = karyawan.nama;
+        
+        // Sel 3: Posisi
+        row.insertCell().textContent = karyawan.posisi;
+        
+        // Sel 4: Usia
+        row.insertCell().textContent = karyawan.usia; 
+
+        // Sel 5: Aksi (Tombol Hapus)
         const actionCell = row.insertCell();
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Hapus';
@@ -75,9 +90,9 @@ function renderTable(data) {
             }
         };
         actionCell.appendChild(deleteButton);
-        // ----------------------------------------
-    }); // <--- AKHIR LOOP
+    });
 }
+
 
 // 2. Fungsi Logika Pengurutan
 function sortData(key) {
