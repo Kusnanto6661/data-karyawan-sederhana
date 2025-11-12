@@ -51,7 +51,7 @@ let isAscending = true;   // default sort direction (Ascending: A-Z, 1-9)
 // --- MODIFIKASI FUNGSI renderTable LAMA ANDA ---
 function renderTable(data) {
     const tableBody = document.getElementById('tableBody'); 
-    
+    tableBody.innerHTML = '';
     // ... (kode pengecekan) ...
 
     data.forEach(karyawan => {
@@ -59,12 +59,24 @@ function renderTable(data) {
         
         // BARIS INI DITAMBAHKAN UNTUK ID
         row.insertCell().textContent = karyawan.id; 
-    
         row.insertCell().textContent = karyawan.nama;
         row.insertCell().textContent = karyawan.posisi;
         row.insertCell().textContent = karyawan.usia;
         row.insertCell().textContent = '...';
-    });
+        
+        const actionCell = row.insertCell();
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Hapus';
+        deleteButton.className = 'delete-btn';
+
+        deleteButton.onclick = function() {
+            if (confirm(`Yakin ingin menghapus ${karyawan.nama}?`)) {
+                 deleteData(karyawan.id);
+            }
+        };
+        actionCell.appendChild(deleteButton);
+        // ----------------------------------------
+    }); // <--- AKHIR LOOP
 }
 
 // 2. Fungsi Logika Pengurutan
@@ -114,6 +126,25 @@ function filterData() {
     renderTable(filteredData);
 }
 
+// --- FUNGSI BARU: DELETE DATA (DITEMPEL DI TEMPAT KOSONG) ---
+
+/**
+ * Menghapus karyawan dari array, Local Storage, dan merender ulang tabel.
+ * @param {string} id - ID karyawan yang akan dihapus
+ */
+function deleteData(id) {
+    // 1. Filter array: Buat array baru tanpa karyawan yang memiliki ID ini
+    // dataKaryawan akan diganti dengan array hasil filtering
+    dataKaryawan = dataKaryawan.filter(karyawan => karyawan.id !== id);
+
+    // 2. Simpan array yang sudah diperbarui ke Local Storage
+    saveDataToLocalStorage(dataKaryawan);
+
+    // 3. Render ulang tabel
+    // Kita panggil sortData agar data yang tersisa tetap terurut rapi
+    sortData('nama'); 
+}
+
 // --- KODE INI DITEMPEL LENGKAP DI BAWAH filterData() ---
 
 const formTambahKaryawan = document.getElementById('formTambahKaryawan'); 
@@ -140,7 +171,7 @@ if (formTambahKaryawan) {
         // GARIS KRUSIAL: Menyimpan data yang sudah diperbarui
         saveDataToLocalStorage(dataKaryawan); 
         
-        renderTable(dataKaryawan);
+        sortData('nama');
         formTambahKaryawan.reset();
         
         // Optional: Sembunyikan modal di sini jika Anda menggunakannya
@@ -169,6 +200,5 @@ document.addEventListener('DOMContentLoaded', () => {
         searchButton.addEventListener('click', filterData);
     }
     
-    // Panggilan untuk menampilkan data awal
-    renderTable(dataKaryawan); 
+    sortData('nama');
 });
