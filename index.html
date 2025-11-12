@@ -7,27 +7,36 @@
     <link rel="stylesheet" href="style.css">    
 </head>
 <body>
-    <div class="container">
-        <h1>Daftar Karyawan Perusahaan 🧍</h1>
 
-        <div id="search-area">
-            <input type="text" id="searchInput" placeholder="Cari berdasarkan Nama atau Posisi...">
-            <button id="searchButton">Cari</button>
-        </div>
-        
-        <table id="data-table"> 
-            <thead>
-                <tr>
-                    <th data-sort-key="nama">nama</th>
-                    <th data-sort-key="posisi">posisi</th>
-                    <th data-sort-key="usia">usia</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody id="tableBody">
-            </tbody>
-            </table>
+    <h1>Manajemen Data Karyawan</h1>
+
+    <button id="tombolTambah">Tambah Karyawan Baru</button>
+
+
+    <div id="modalTambah" style="display: none;">
+        <form id="formTambahKaryawan"> 
+            <h2>Masukkan Data Karyawan</h2>
+            
+            <label for="inputNama">Nama:</label>
+            <input type="text" id="inputNama" required>
+
+            <label for="inputPosisi">Posisi:</label>
+            <input type="text" id="inputPosisi" required>
+
+            <label for="inputUsia">Usia:</label>
+            <input type="number" id="inputUsia" required>
+            
+            <button type="submit">Simpan Data</button>
+            <button type="button" onclick="document.getElementById('modalTambah').style.display='none'">Batal</button>
+        </form>
     </div>
+    ---
+    
+    <input type="text" id="searchInput" placeholder="Cari Nama/Posisi...">
+    <button id="searchButton">Cari</button>
+
+    <table>
+        </table>
 
 <script src="script.js"></script> 
 </body>
